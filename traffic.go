@@ -1,9 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"image/color"
 	"log"
+
+	systems "github.com/engoengine/temod/Systems"
 
 	"engo.io/ecs"
 	"engo.io/engo"
@@ -16,20 +17,6 @@ type City struct {
 	ecs.BasicEntity
 	common.RenderComponent
 	common.SpaceComponent
-}
-
-type CityBuildingSystem struct{}
-
-func (*CityBuildingSystem) Remove(ecs.BasicEntity) {}
-
-func (*CityBuildingSystem) Update(dt float32) {
-	if engo.Input.Button("AddCity").JustPressed() {
-		fmt.Println("The gamer pressed F1")
-	}
-}
-
-func (*CityBuildingSystem) New(*ecs.World) {
-	fmt.Println("CityBuildingSystem was added to the Scene")
 }
 
 // Type uniquely defines your game type37G
@@ -47,7 +34,7 @@ func (*myScene) Setup(world *ecs.World) {
 	engo.Input.RegisterButton("AddCity", engo.F1)
 	common.SetBackground(color.White)
 	world.AddSystem(&common.RenderSystem{})
-	world.AddSystem(&CityBuildingSystem{})
+	world.AddSystem(&systems.CityBuildingSystem{})
 
 	city := City{BasicEntity: ecs.NewBasic()}
 
