@@ -7,9 +7,10 @@ import (
 
 func main() {
 	opts := engo.RunOptions{
-		Title:  "Hello World",
-		Width:  400,
-		Height: 400,
+		Title:          "Hello World",
+		Width:          800,
+		Height:         800,
+		StandardInputs: true,
 	}
 	engo.Run(opts, &scene.MyScene{})
 }
